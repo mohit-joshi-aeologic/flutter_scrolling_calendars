@@ -18,23 +18,23 @@ class MonthView extends StatelessWidget {
     this.titleStyle,
   });
 
-  final BuildContext context;
-  final int year;
-  final int month;
-  final double padding;
-  final Color currentDateColor;
-  final List<DateTime> highlightedDates;
-  final Color highlightedDateColor;
-  final List<String> monthNames;
-  final Function onTap;
-  final TextStyle titleStyle;
+  final BuildContext? context;
+  final int? year;
+  final int? month;
+  final double? padding;
+  final Color? currentDateColor;
+  final List<DateTime>? highlightedDates;
+  final Color? highlightedDateColor;
+  final List<String>? monthNames;
+  final Function? onTap;
+  final TextStyle? titleStyle;
 
-  Color getDayNumberColor(DateTime date) {
-    Color color;
+  Color? getDayNumberColor(DateTime date) {
+    Color? color;
     if (isCurrentDate(date)) {
       color = currentDateColor;
     } else if (highlightedDates != null &&
-        isHighlightedDate(date, highlightedDates)) {
+        isHighlightedDate(date, highlightedDates!)) {
       color = highlightedDateColor;
     }
     return color;
@@ -44,13 +44,13 @@ class MonthView extends StatelessWidget {
     final List<Row> dayRows = <Row>[];
     final List<DayNumber> dayRowChildren = <DayNumber>[];
 
-    final int daysInMonth = getDaysInMonth(year, month);
-    final int firstWeekdayOfMonth = DateTime(year, month, 1).weekday;
+    final int daysInMonth = getDaysInMonth(year!, month!);
+    final int firstWeekdayOfMonth = DateTime(year!, month!, 1).weekday;
 
     for (int day = 2 - firstWeekdayOfMonth; day <= daysInMonth; day++) {
-      Color color;
+      Color? color;
       if (day > 0) {
-        color = getDayNumberColor(DateTime(year, month, day));
+        color = getDayNumberColor(DateTime(year!, month!, day));
       }
 
       dayRowChildren.add(
@@ -80,7 +80,7 @@ class MonthView extends StatelessWidget {
   Widget buildMonthView(BuildContext context) {
     return Container(
       width: 7 * getDayNumberSize(context),
-      margin: EdgeInsets.all(padding),
+      margin: EdgeInsets.all(padding!),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -104,9 +104,9 @@ class MonthView extends StatelessWidget {
         ? Container(
             child: buildMonthView(context),
           )
-        : FlatButton(
-            onPressed: () => onTap(year, month),
-            padding: const EdgeInsets.all(0.0),
+        : TextButton(
+            onPressed: () => onTap!(year, month),
+            // padding: const EdgeInsets.all(0.0),
             child: buildMonthView(context),
           );
   }

@@ -7,8 +7,8 @@ class DayNumber extends StatelessWidget {
     this.color,
   });
 
-  final int day;
-  final Color color;
+  final int? day;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class DayNumber extends StatelessWidget {
             )
           : null,
       child: Text(
-        day < 1 ? '' : day.toString(),
+        day! < 1 ? '' : day.toString(),
         textAlign: TextAlign.center,
         style: TextStyle(
           color: color != null ? Colors.white : Colors.black87,

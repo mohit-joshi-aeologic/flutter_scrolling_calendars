@@ -11,15 +11,16 @@ class MonthTitle extends StatelessWidget {
     ),
   });
 
-  final int month;
-  final List<String> monthNames;
-  final TextStyle style;
+  final int? month;
+  final List<String>? monthNames;
+  final TextStyle? style;
+
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Text(
-        getMonthName(month, monthNames: monthNames),
+        getMonthName(month!, monthNames: monthNames!),
         style: style,
         maxLines: 1,
         overflow: TextOverflow.fade,

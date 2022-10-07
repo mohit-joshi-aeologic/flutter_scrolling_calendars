@@ -20,11 +20,11 @@ class ScrollingYearsCalendar extends StatefulWidget {
         assert(initialDate != null),
         assert(firstDate != null),
         assert(lastDate != null),
-        assert(!initialDate.isBefore(firstDate),
+        assert(!(initialDate?.isBefore(firstDate!))!,
             'initialDate must be on or after firstDate'),
-        assert(!initialDate.isAfter(lastDate),
+        assert(!(initialDate?.isAfter(lastDate!))!,
             'initialDate must be on or before lastDate'),
-        assert(!firstDate.isAfter(lastDate),
+        assert(!(firstDate?.isAfter(lastDate!))!,
             'lastDate must be on or after firstDate'),
         assert(currentDateColor != null),
         assert(highlightedDates == null || highlightedDateColor != null,
@@ -33,16 +33,16 @@ class ScrollingYearsCalendar extends StatefulWidget {
             monthNames == null || monthNames.length == DateTime.monthsPerYear,
             'monthNames must contain all months of the year');
 
-  final BuildContext context;
-  final DateTime initialDate;
-  final DateTime firstDate;
-  final DateTime lastDate;
-  final Color currentDateColor;
-  final List<DateTime> highlightedDates;
-  final Color highlightedDateColor;
-  final List<String> monthNames;
-  final Function onMonthTap;
-  final TextStyle monthTitleStyle;
+  final BuildContext? context;
+  final DateTime? initialDate;
+  final DateTime? firstDate;
+  final DateTime? lastDate;
+  final Color? currentDateColor;
+  final List<DateTime>? highlightedDates;
+  final Color? highlightedDateColor;
+  final List<String>? monthNames;
+  final Function? onMonthTap;
+  final TextStyle? monthTitleStyle;
 
   @override
   _ScrollingYearsCalendarState createState() => _ScrollingYearsCalendarState();
@@ -65,12 +65,12 @@ class _ScrollingYearsCalendarState extends State<ScrollingYearsCalendar> {
 
   @override
   Widget build(BuildContext context) {
-    final int _itemCount = widget.lastDate.year - widget.firstDate.year + 1;
+    final int _itemCount = (widget.lastDate?.year)! - (widget.firstDate?.year)! + 1;
 
     // Makes sure the right initial offset is calculated so the listview
     // jumps to the initial year.
     final double _initialOffset =
-        (widget.initialDate.year - widget.firstDate.year) *
+        ((widget.initialDate?.year)! - (widget.firstDate?.year)!) *
             getYearViewHeight(context);
     final ScrollController _scrollController =
         ScrollController(initialScrollOffset: _initialOffset);
@@ -80,7 +80,7 @@ class _ScrollingYearsCalendarState extends State<ScrollingYearsCalendar> {
       controller: _scrollController,
       itemCount: _itemCount,
       itemBuilder: (BuildContext context, int index) {
-        final int year = index + widget.firstDate.year;
+        final int year = index + (widget.firstDate?.year)!;
         return _getYearView(year);
       },
     );

@@ -6,7 +6,7 @@ class YearTitle extends StatelessWidget {
     this.year,
   );
 
-  final int year;
+  final int? year;
 
   @override
   Widget build(BuildContext context) {
